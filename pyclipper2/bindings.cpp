@@ -4,8 +4,8 @@
 #include <nanobind/ndarray.h>
 
 // Include the Clipper2 headers
-#include "external/clipper2/CPP/Clipper2Lib/include/clipper2/clipper.export.h"
-#include "external/clipper2/CPP/Clipper2Lib/include/clipper2/clipper.h"
+#include "clipper2/clipper.export.h"
+#include "clipper2/clipper.h"
 
 namespace nb = nanobind;
 using namespace Clipper2Lib;
