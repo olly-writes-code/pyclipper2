@@ -1,5 +1,5 @@
 project(
-  'my_project_name',
+  'pyclipper2',
   'cpp',
   version: '0.0.1',
   meson_version: '>=1.0.0',
@@ -10,7 +10,7 @@ python = import('python').find_installation()
 nanobind_dep = dependency('nanobind')
 mod = python.extension_module(
   'my_module_name',
-  sources: ['path_to_module.cpp'],
+  sources: ['pyclipper2/bindings.cpp'],
   dependencies: [nanobind_dep],
   install: true,
 )
