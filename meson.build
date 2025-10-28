@@ -18,7 +18,7 @@ python = import('python').find_installation()
 nanobind_dep = dependency('nanobind')
 mod = python.extension_module(
   'my_module_name',
-  sources: ['pyclipper2/bindings.cpp', clipper2_sources],
+  sources: ['src/bindings.cpp', clipper2_sources],
   dependencies: [nanobind_dep],
   include_directories: clipper2_inc,
   install: true,

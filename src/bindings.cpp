@@ -8,7 +8,7 @@
 namespace nb = nanobind;
 using namespace Clipper2Lib;
 
-NB_MODULE(_clipper2, m) {
+NB_MODULE(pyclipper2, m) {
     m.doc() = "Python bindings for Clipper2 library";
 
     // Enums
