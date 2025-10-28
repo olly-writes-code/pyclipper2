@@ -3,8 +3,6 @@
 #include <nanobind/stl/tuple.h>
 #include <nanobind/ndarray.h>
 
-// Include the Clipper2 headers
-#include "clipper2/clipper.export.h"
 #include "clipper2/clipper.h"
 
 namespace nb = nanobind;
@@ -15,7 +13,7 @@ NB_MODULE(_clipper2, m) {
 
     // Enums
     nb::enum_<ClipType>(m, "ClipType")
-        .value("NoClip", ClipType::None)
+        .value("NoClip", ClipType::NoClip)
         .value("Intersection", ClipType::Intersection)
         .value("Union", ClipType::Union)
         .value("Difference", ClipType::Difference)
@@ -59,31 +57,6 @@ NB_MODULE(_clipper2, m) {
                    ", y=" + std::to_string(p.y) + ")";
         });
 
-    // Path types (std::vector wrappers)
-    nb::class_<Path64>(m, "Path64")
-        .def(nb::init<>())
-        .def("__len__", [](const Path64& p) { return p.size(); })
-        .def("__getitem__", [](const Path64& p, size_t i) { return p[i]; })
-        .def("append", [](Path64& p, const Point64& pt) { p.push_back(pt); });
-
-    nb::class_<PathD>(m, "PathD")
-        .def(nb::init<>())
-        .def("__len__", [](const PathD& p) { return p.size(); })
-        .def("__getitem__", [](const PathD& p, size_t i) { return p[i]; })
-        .def("append", [](PathD& p, const PointD& pt) { p.push_back(pt); });
-
-    nb::class_<Paths64>(m, "Paths64")
-        .def(nb::init<>())
-        .def("__len__", [](const Paths64& p) { return p.size(); })
-        .def("__getitem__", [](const Paths64& p, size_t i) { return p[i]; })
-        .def("append", [](Paths64& p, const Path64& path) { p.push_back(path); });
-
-    nb::class_<PathsD>(m, "PathsD")
-        .def(nb::init<>())
-        .def("__len__", [](const PathsD& p) { return p.size(); })
-        .def("__getitem__", [](const PathsD& p, size_t i) { return p[i]; })
-        .def("append", [](PathsD& p, const PathD& path) { p.push_back(path); });
-
     // Rect types
     nb::class_<Rect64>(m, "Rect64")
         .def(nb::init<int64_t, int64_t, int64_t, int64_t>())
@@ -99,36 +72,12 @@ NB_MODULE(_clipper2, m) {
         .def_rw("right", &RectD::right)
         .def_rw("bottom", &RectD::bottom);
 
-    // Main Clipper64 class
-    nb::class_<Clipper64>(m, "Clipper64")
-        .def(nb::init<>())
-        .def("add_subject", &Clipper64::AddSubject)
-        .def("add_open_subject", &Clipper64::AddOpenSubject)
-        .def("add_clip", &Clipper64::AddClip)
-        .def("execute", 
-             nb::overload_cast<ClipType, FillRule, Paths64&, Paths64&>(&Clipper64::Execute))
-        .def("clear", &Clipper64::Clear)
-        .def("preserve_collinear", &Clipper64::PreserveCollinear)
-        .def("reverse_solution", &Clipper64::ReverseSolution);
-
-    // Main ClipperD class  
-    nb::class_<ClipperD>(m, "ClipperD")
-        .def(nb::init<int>(), "precision"_a = 2)
-        .def("add_subject", &ClipperD::AddSubject)
-        .def("add_open_subject", &ClipperD::AddOpenSubject)
-        .def("add_clip", &ClipperD::AddClip)
-        .def("execute",
-             nb::overload_cast<ClipType, FillRule, PathsD&, PathsD&>(&ClipperD::Execute))
-        .def("clear", &ClipperD::Clear)
-        .def("preserve_collinear", &ClipperD::PreserveCollinear)
-        .def("reverse_solution", &ClipperD::ReverseSolution);
-
     // ClipperOffset
     nb::class_<ClipperOffset>(m, "ClipperOffset")
         .def(nb::init<double, double, bool>(),
-             "miter_limit"_a = 2.0,
-             "arc_tolerance"_a = 0.0,
-             "reverse_solution"_a = false)
+             nb::arg("miter_limit") = 2.0,
+             nb::arg("arc_tolerance") = 0.0,
+             nb::arg("reverse_solution") = false)
         .def("add_path", &ClipperOffset::AddPath)
         .def("add_paths", &ClipperOffset::AddPaths)
         .def("execute", 
@@ -136,8 +85,6 @@ NB_MODULE(_clipper2, m) {
         .def("clear", &ClipperOffset::Clear);
 
     // Utility functions
-    m.def("version", &Version, "Get Clipper2 version");
-    
     m.def("area", 
           nb::overload_cast<const Path64&>(&Area<int64_t>),
           "Calculate area of a path");
