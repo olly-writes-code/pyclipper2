@@ -43,18 +43,16 @@ NB_MODULE(pyclipper2, m) {
         .def(nb::init<int64_t, int64_t>())
         .def_rw("x", &Point64::x)
         .def_rw("y", &Point64::y)
-        .def("__repr__", [](const Point64& p) {
-            return "Point64(x=" + std::to_string(p.x) + 
-                   ", y=" + std::to_string(p.y) + ")";
+        .def("__repr__", [](const Point64 &p) {
+            return nb::str("Point64(x={}, y={})").format(p.x, p.y);
         });
 
     nb::class_<PointD>(m, "PointD")
         .def(nb::init<double, double>())
         .def_rw("x", &PointD::x)
         .def_rw("y", &PointD::y)
-        .def("__repr__", [](const PointD& p) {
-            return "PointD(x=" + std::to_string(p.x) + 
-                   ", y=" + std::to_string(p.y) + ")";
+        .def("__repr__", [](const PointD &p) {
+            return nb::str("PointD(x={}, y={})").format(p.x, p.y);
         });
 
     // Rect types

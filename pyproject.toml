@@ -6,3 +6,8 @@ dynamic = ['version']
 requires = ['meson-python']
 
 build-backend = 'mesonpy'
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
