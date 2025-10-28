@@ -1,0 +1,8 @@
+[project]
+name = "pyclipper2"
+dynamic = ['version']
+
+[build-system]
+requires = ['meson-python']
+
+build-backend = 'mesonpy'
