@@ -38,6 +38,11 @@ NB_MODULE(pyclipper2, m) {
         .value("Square", EndType::Square)
         .value("Round", EndType::Round);
 
+    nb::enum_<PointInPolygonResult>(m, "PointInPolygonResult")
+        .value("IsOn", PointInPolygonResult::IsOn)
+        .value("IsInside", PointInPolygonResult::IsInside)
+        .value("IsOutside", PointInPolygonResult::IsOutside);
+
     // Core types - Point64, PointD
     nb::class_<Point64>(m, "Point64")
         .def(nb::init<int64_t, int64_t>())

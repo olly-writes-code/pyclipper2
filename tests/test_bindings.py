@@ -96,5 +96,5 @@ def test_point_in_polygon():
 
     print(f"✓ point_in_polygon (inside): {inside_result}")
     print(f"✓ point_in_polygon (outside): {outside_result}")
-    assert inside_result != 0  # Inside
-    assert outside_result == 0  # Outside
+    assert inside_result == pyclipper2.PointInPolygonResult.IsInside
+    assert outside_result == pyclipper2.PointInPolygonResult.IsOutside
