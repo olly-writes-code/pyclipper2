@@ -1,0 +1,39 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		// ensures we have basic type checking for pylance
+		"python.analysis.typeCheckingMode": "basic",
+		"files.exclude": {
+			"**/__pycache__/**": true,
+		},
+		"[python]": {
+			"editor.formatOnSave": true,
+			"editor.codeActionsOnSave": {
+				"source.fixAll": "explicit",
+				"source.organizeImports": "explicit"
+			},
+			"editor.defaultFormatter": "charliermarsh.ruff",
+		},
+		"notebook.formatOnSave.enabled": true,
+		"C_Cpp.default.compileCommands": "/Users/olammas/Documents/projects/pyclipper2/builddir/compile_commands.json",
+		"C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
+	},
+	"extensions": {
+		"recommendations": [
+			// Python tools
+			"ms-python.python",
+			"ms-python.vscode-pylance",
+			"ms-toolsai.jupyter",
+			"charliermarsh.ruff",
+			// Developer tools
+			"eamodio.gitlens",
+			"nefrob.vscode-just-syntax",
+			"tamasfe.even-better-toml",
+			"usernamehw.errorlens",
+		]
+	}
+}

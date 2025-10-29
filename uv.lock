@@ -21,6 +21,15 @@ wheels = [
 ]
 
 [[package]]
+name = "nanobind"
+version = "2.9.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d1/48/edccb2ec318dee2f979765ca8e565e867569522bb55ad384d57b01c3da03/nanobind-2.9.2.tar.gz", hash = "sha256:e7608472de99d375759814cab3e2c94aba3f9ec80e62cfef8ced495ca5c27d6e", size = 984270, upload-time = "2025-09-04T12:52:45.322Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/05/20/f8944f162df48a20f8f533f4e4faed63891aa368ceca8cc8b32d4c785ed4/nanobind-2.9.2-py3-none-any.whl", hash = "sha256:c37957ffd5eac7eda349cff3622ecd32e5ee1244ecc912c99b5bc8188bafd16e", size = 243830, upload-time = "2025-09-04T12:52:43.652Z" },
+]
+
+[[package]]
 name = "packaging"
 version = "25.0"
 source = { registry = "https://pypi.org/simple" }
@@ -44,13 +53,17 @@ source = { editable = "." }
 
 [package.dev-dependencies]
 dev = [
+    { name = "nanobind" },
     { name = "pytest" },
 ]
 
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=8.4.2" }]
+dev = [
+    { name = "nanobind", specifier = ">=2.9.2" },
+    { name = "pytest", specifier = ">=8.4.2" },
+]
 
 [[package]]
 name = "pygments"
