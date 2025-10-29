@@ -1,10 +1,10 @@
 # pyclipper2
 
-Python bindings for [Clipper2]([url](https://github.com/AngusJohnson/Clipper2/tree/main))
+Python bindings for [Clipper2](https://github.com/AngusJohnson/Clipper2/tree/main)
 
 ### Why does this exists?
-Clipper2 is now alive and kicking. It should be preferred vs the old Clipper library (see docs [here]([url](https://www.angusj.com/clipper2/Docs/Overview.htm))).
+Clipper2 is now alive and kicking. It should be preferred vs the old Clipper library (see docs [here](https://www.angusj.com/clipper2/Docs/Overview.htm)).
 
-While one could leverage [Shapely]([url](https://shapely.readthedocs.io/en/stable/)) for some 2D line and shape operations, it's API and performance is limited.
+While one could leverage [Shapely](https://shapely.readthedocs.io/en/stable/) for some 2D line and shape operations, it's API and performance is limited.
 
 
