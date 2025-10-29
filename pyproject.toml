@@ -9,6 +9,7 @@ build-backend = 'mesonpy'
 
 [dependency-groups]
 dev = [
+    "nanobind>=2.9.2", ### we add nanobind here for stub generation
     "pytest>=8.4.2",
 ]
 
@@ -16,3 +17,6 @@ dev = [
 testpaths = [
     "tests",
 ]
+
+[tool.pyright]
+exclude = ["subprojects", ".venv"]
