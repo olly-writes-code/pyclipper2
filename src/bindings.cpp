@@ -13,35 +13,44 @@ NB_MODULE(pyclipper2, m) {
 
     // Enums
     nb::enum_<ClipType>(m, "ClipType")
-        .value("NoClip", ClipType::NoClip)
-        .value("Intersection", ClipType::Intersection)
-        .value("Union", ClipType::Union)
-        .value("Difference", ClipType::Difference)
-        .value("Xor", ClipType::Xor);
+        .value("NO_CLIP", ClipType::NoClip)
+        .value("INTERSECTION", ClipType::Intersection)
+        .value("UNION", ClipType::Union)
+        .value("DIFFERENCE", ClipType::Difference)
+        .value("XOR", ClipType::Xor);
 
     nb::enum_<FillRule>(m, "FillRule")
-        .value("EvenOdd", FillRule::EvenOdd)
-        .value("NonZero", FillRule::NonZero)
-        .value("Positive", FillRule::Positive)
-        .value("Negative", FillRule::Negative);
+        .value("EVEN_ODD", FillRule::EvenOdd)
+        .value("NON_ZERO", FillRule::NonZero)
+        .value("POSITIVE", FillRule::Positive)
+        .value("NEGATIVE", FillRule::Negative);
 
     nb::enum_<JoinType>(m, "JoinType")
-        .value("Square", JoinType::Square)
-        .value("Bevel", JoinType::Bevel)
-        .value("Round", JoinType::Round)
-        .value("Miter", JoinType::Miter);
+        .value("SQUARE", JoinType::Square)
+        .value("BEVEL", JoinType::Bevel)
+        .value("ROUND", JoinType::Round)
+        .value("MITER", JoinType::Miter);
 
     nb::enum_<EndType>(m, "EndType")
-        .value("Polygon", EndType::Polygon)
-        .value("Joined", EndType::Joined)
-        .value("Butt", EndType::Butt)
-        .value("Square", EndType::Square)
-        .value("Round", EndType::Round);
+        .value("POLYGON", EndType::Polygon)
+        .value("JOINED", EndType::Joined)
+        .value("BUTT", EndType::Butt)
+        .value("SQUARE", EndType::Square)
+        .value("ROUND", EndType::Round);
+
+    nb::enum_<PathType>(m, "PathType")
+        .value("SUBJECT", PathType::Subject)
+        .value("CLIP", PathType::Clip);
+
+    nb::enum_<JoinWith>(m, "JoinWith")
+        .value("NO_JOIN", JoinWith::NoJoin)
+        .value("LEFT", JoinWith::Left)
+        .value("RIGHT", JoinWith::Right);
 
     nb::enum_<PointInPolygonResult>(m, "PointInPolygonResult")
-        .value("IsOn", PointInPolygonResult::IsOn)
-        .value("IsInside", PointInPolygonResult::IsInside)
-        .value("IsOutside", PointInPolygonResult::IsOutside);
+        .value("IS_ON", PointInPolygonResult::IsOn)
+        .value("IS_INSIDE", PointInPolygonResult::IsInside)
+        .value("IS_OUTSIDE", PointInPolygonResult::IsOutside);
 
     // Core types - Point64, PointD
     nb::class_<Point64>(m, "Point64")
