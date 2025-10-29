@@ -7,4 +7,8 @@ Clipper2 is now alive and kicking. It should be preferred vs the old Clipper lib
 
 While one could leverage [Shapely](https://shapely.readthedocs.io/en/stable/) for some 2D line and shape operations, it's API and performance is limited.
 
+### ⚠️ Warning! 
+
+This package is very very early. I have only published wheels for python 3.13 and ARM Macs
+
 
