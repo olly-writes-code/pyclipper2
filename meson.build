@@ -1,7 +1,7 @@
 project(
   'pyclipper2',
   'cpp',
-  version: '0.0.1',
+  version: '0.0.2',
   meson_version: '>=1.0.0',
   default_options: ['cpp_std=c++17', 'b_ndebug=if-release'],
 )
