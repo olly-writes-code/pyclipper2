@@ -79,16 +79,22 @@ def test_version():
     version = pyclipper2.VERSION
     print(f"✓ Clipper2 version: {version}")
 
-if __name__ == "__main__":
-    print("Testing Clipper2 Python bindings...\n")
-    
-    test_point64()
-    test_pointd()
-    test_enums()
-    test_rect64()
-    test_area()
-    test_is_positive()
-    test_clipper_offset()
-    test_version()
-    
-    print("\n✅ All tests passed!")
+
+def test_point_in_polygon():    
+    """Test point_in_polygon function"""
+    polygon = [
+        pyclipper2.Point64(0, 0),
+        pyclipper2.Point64(100, 0),
+        pyclipper2.Point64(100, 100),
+        pyclipper2.Point64(0, 100)
+    ]
+    inside_point = pyclipper2.Point64(50, 50)
+    outside_point = pyclipper2.Point64(150, 150)
+
+    inside_result = pyclipper2.point_in_polygon(inside_point, polygon)
+    outside_result = pyclipper2.point_in_polygon(outside_point, polygon)
+
+    print(f"✓ point_in_polygon (inside): {inside_result}")
+    print(f"✓ point_in_polygon (outside): {outside_result}")
+    assert inside_result != 0  # Inside
+    assert outside_result == 0  # Outside

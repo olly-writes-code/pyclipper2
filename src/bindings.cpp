@@ -83,6 +83,8 @@ NB_MODULE(pyclipper2, m) {
         .def("clear", &ClipperOffset::Clear);
 
     // Utility functions
+
+    // We must write one for Path64 (int64) and one for PathD (double)
     m.def("area", 
           nb::overload_cast<const Path64&>(&Area<int64_t>),
           "Calculate area of a path");
@@ -98,6 +100,16 @@ NB_MODULE(pyclipper2, m) {
     m.def("is_positive",
           nb::overload_cast<const PathD&>(&IsPositive<double>),
           "Check if path is positively oriented");
+
+    m.def("point_in_polygon",
+          nb::overload_cast<const Point64&, const Path64&>(&PointInPolygon<int64_t>),
+          "Check if point is in polygon",
+          nb::arg("pt"), nb::arg("polygon"));
+
+    m.def("point_in_polygon",
+          nb::overload_cast<const PointD&, const PathD&>(&PointInPolygon<double>),
+          "Check if point is in polygon",
+          nb::arg("pt"), nb::arg("polygon"));
 
     // Module constants
     m.attr("VERSION") = CLIPPER2_VERSION;
