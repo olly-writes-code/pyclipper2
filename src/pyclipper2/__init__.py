@@ -1,1 +1,18 @@
-from .bindings import __doc__, Point64, PointD, Rect64, area, is_positive, ClipperOffset, ClipType, FillRule, JoinType, EndType, VERSION, point_in_polygon, PointInPolygonResult
+from .bindings import (
+    VERSION,
+    ClipperOffset,
+    ClipType,
+    EndType,
+    FillRule,
+    JoinType,
+    JoinWith,
+    PathType,
+    Point64,
+    PointD,
+    PointInPolygonResult,
+    Rect64,
+    __doc__,
+    area,
+    is_positive,
+    point_in_polygon,
+)
