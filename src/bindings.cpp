@@ -13,30 +13,44 @@ NB_MODULE(pyclipper2, m) {
 
     // Enums
     nb::enum_<ClipType>(m, "ClipType")
-        .value("NoClip", ClipType::NoClip)
-        .value("Intersection", ClipType::Intersection)
-        .value("Union", ClipType::Union)
-        .value("Difference", ClipType::Difference)
-        .value("Xor", ClipType::Xor);
+        .value("NO_CLIP", ClipType::NoClip)
+        .value("INTERSECTION", ClipType::Intersection)
+        .value("UNION", ClipType::Union)
+        .value("DIFFERENCE", ClipType::Difference)
+        .value("XOR", ClipType::Xor);
 
     nb::enum_<FillRule>(m, "FillRule")
-        .value("EvenOdd", FillRule::EvenOdd)
-        .value("NonZero", FillRule::NonZero)
-        .value("Positive", FillRule::Positive)
-        .value("Negative", FillRule::Negative);
+        .value("EVEN_ODD", FillRule::EvenOdd)
+        .value("NON_ZERO", FillRule::NonZero)
+        .value("POSITIVE", FillRule::Positive)
+        .value("NEGATIVE", FillRule::Negative);
 
     nb::enum_<JoinType>(m, "JoinType")
-        .value("Square", JoinType::Square)
-        .value("Bevel", JoinType::Bevel)
-        .value("Round", JoinType::Round)
-        .value("Miter", JoinType::Miter);
+        .value("SQUARE", JoinType::Square)
+        .value("BEVEL", JoinType::Bevel)
+        .value("ROUND", JoinType::Round)
+        .value("MITER", JoinType::Miter);
 
     nb::enum_<EndType>(m, "EndType")
-        .value("Polygon", EndType::Polygon)
-        .value("Joined", EndType::Joined)
-        .value("Butt", EndType::Butt)
-        .value("Square", EndType::Square)
-        .value("Round", EndType::Round);
+        .value("POLYGON", EndType::Polygon)
+        .value("JOINED", EndType::Joined)
+        .value("BUTT", EndType::Butt)
+        .value("SQUARE", EndType::Square)
+        .value("ROUND", EndType::Round);
+
+    nb::enum_<PathType>(m, "PathType")
+        .value("SUBJECT", PathType::Subject)
+        .value("CLIP", PathType::Clip);
+
+    nb::enum_<JoinWith>(m, "JoinWith")
+        .value("NO_JOIN", JoinWith::NoJoin)
+        .value("LEFT", JoinWith::Left)
+        .value("RIGHT", JoinWith::Right);
+
+    nb::enum_<PointInPolygonResult>(m, "PointInPolygonResult")
+        .value("IS_ON", PointInPolygonResult::IsOn)
+        .value("IS_INSIDE", PointInPolygonResult::IsInside)
+        .value("IS_OUTSIDE", PointInPolygonResult::IsOutside);
 
     // Core types - Point64, PointD
     nb::class_<Point64>(m, "Point64")
@@ -83,6 +97,8 @@ NB_MODULE(pyclipper2, m) {
         .def("clear", &ClipperOffset::Clear);
 
     // Utility functions
+
+    // We must write one for Path64 (int64) and one for PathD (double)
     m.def("area", 
           nb::overload_cast<const Path64&>(&Area<int64_t>),
           "Calculate area of a path");
@@ -98,6 +114,16 @@ NB_MODULE(pyclipper2, m) {
     m.def("is_positive",
           nb::overload_cast<const PathD&>(&IsPositive<double>),
           "Check if path is positively oriented");
+
+    m.def("point_in_polygon",
+          nb::overload_cast<const Point64&, const Path64&>(&PointInPolygon<int64_t>),
+          "Check if point is in polygon",
+          nb::arg("pt"), nb::arg("polygon"));
+
+    m.def("point_in_polygon",
+          nb::overload_cast<const PointD&, const PathD&>(&PointInPolygon<double>),
+          "Check if point is in polygon",
+          nb::arg("pt"), nb::arg("polygon"));
 
     // Module constants
     m.attr("VERSION") = CLIPPER2_VERSION;
