@@ -127,3 +127,15 @@ def test_point_in_polygon():
     print(f"✓ point_in_polygon (outside): {outside_result}")
     assert inside_result == pyclipper2.PointInPolygonResult.IS_INSIDE
     assert outside_result == pyclipper2.PointInPolygonResult.IS_OUTSIDE
+
+
+def test_path():
+    input = [[1, 1], [2, 2]]
+
+    ### create path
+    path = pyclipper2.make_path(input)
+
+    ### inflate path
+    pyclipper2.inflate_paths(
+        [path], 0.5, pyclipper2.JoinType.ROUND, pyclipper2.EndType.ROUND
+    )
