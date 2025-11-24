@@ -1,6 +1,10 @@
 [project]
 name = "pyclipper2"
 dynamic = ['version']
+dependencies = [
+    "marimo>=0.18.0",
+    "pyzmq>=27.1.0",
+]
 
 [build-system]
 requires = ['meson-python']
@@ -9,9 +13,15 @@ build-backend = 'mesonpy'
 
 [dependency-groups]
 dev = [
+    "ipykernel>=7.1.0",
+    "marimo>=0.18.0",
     "nanobind>=2.9.2", ### we add nanobind here for stub generation
+    "nbformat>=5.10.4",
+    "plotly>=6.5.0",
+    "polars>=1.35.2",
     "pytest>=9.0.1",
     "shapely>=2.1.2", ### this is so we can testing vs shapely
+    "statsmodels>=0.14.5",
 ]
 
 [tool.pytest.ini_options]

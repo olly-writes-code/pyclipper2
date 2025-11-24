@@ -10,6 +10,7 @@
 		"files.exclude": {
 			"**/__pycache__/**": true,
 		},
+		"jupyter.notebookFileRoot": "${workspaceFolder}",
 		"[python]": {
 			"editor.formatOnSave": true,
 			"editor.codeActionsOnSave": {
