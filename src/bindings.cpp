@@ -129,7 +129,7 @@ NB_MODULE(pyclipper2, m) {
     m.attr("VERSION") = CLIPPER2_VERSION;
 
     // Methods
-    m.def("make_path", 
+    m.def("make_path_double",
       [](nb::list points) {
           std::vector<float> flat;
           for (auto point : points) {
@@ -140,7 +140,20 @@ NB_MODULE(pyclipper2, m) {
           return MakePathD(flat);
       },
       nb::arg("points"),
-      "Create a Path from a list of [x, y] points");
+      "Create a PathD from a list of [x, y] points");
+
+    m.def("make_path",
+      [](nb::list points) {
+          std::vector<int64_t> flat;
+          for (auto point : points) {
+              auto pt = nb::cast<nb::list>(point);
+              flat.push_back(nb::cast<int64_t>(pt[0]));
+              flat.push_back(nb::cast<int64_t>(pt[1]));
+          }
+          return MakePath(flat);
+      },
+      nb::arg("points"),
+      "Create a Path64 from a list of [x, y] integer points");
 
     m.def("inflate_paths", 
       [](const PathsD& paths, double delta, JoinType jt, EndType et,

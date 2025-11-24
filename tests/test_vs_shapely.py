@@ -1,5 +1,6 @@
 import math
 
+import pytest
 from shapely import Point, Polygon, unary_union
 
 import pyclipper2
@@ -72,3 +73,30 @@ def test_high_level_functions():
     result = pyclipper2.xor_(paths1, paths2, pyclipper2.FillRule.NON_ZERO)
     result_poly = paths64_to_shapely(result)
     assert result_poly.area == square1.symmetric_difference(square2).area
+
+
+def test_path_point_inflate_intersection():
+    input_point = [1, 1]
+    input_point_scaled = [
+        [input_point[0] * SCALE_FACTOR, input_point[0] * SCALE_FACTOR]
+    ]
+    radius = 0.5
+    point_path = pyclipper2.make_path(input_point_scaled)
+    with_buffer = pyclipper2.inflate_paths(
+        [point_path],
+        radius * SCALE_FACTOR,
+        pyclipper2.JoinType.ROUND,
+        pyclipper2.EndType.ROUND,
+    )
+    square = Polygon([(0, 0), (10, 0), (10, 10), (0, 10)])
+    square_path = [shapely_to_path64(square)]
+    output = pyclipper2.intersection(
+        with_buffer, square_path, pyclipper2.FillRule.NON_ZERO
+    )
+    pc_area = pyclipper2.area(output[0]) / (SCALE_FACTOR**2)
+
+    ### compare vs shapely
+    sh_point = Point(input_point).buffer(radius)
+    intersection = square.intersection(sh_point)
+    sh_area = intersection.area
+    assert pc_area == pytest.approx(sh_area, rel=0.01)
