@@ -94,13 +94,6 @@ def test_path_point_inflate_intersection():
         with_buffer, square_path, pyclipper2.FillRule.NON_ZERO
     )
     pc_area = pyclipper2.area(output[0]) / (SCALE_FACTOR**2)
-    print(f"Number of paths in with_buffer: {len(with_buffer)}")
-    print(f"Number of points in first path: {len(with_buffer[0])}")
-    print(
-        f"Area of with_buffer[0]: {pyclipper2.area(with_buffer[0]) / (SCALE_FACTOR**2)}"
-    )
-    print(f"Circle bounds (first few points): {with_buffer[0][:3]}")
-    print(f"Square bounds (first few points): {square_path[0][:3]}")
 
     ### compare vs shapely
     sh_point = Point(input_point).buffer(radius)
