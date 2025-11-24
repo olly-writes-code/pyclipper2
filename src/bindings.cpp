@@ -155,6 +155,19 @@ NB_MODULE(pyclipper2, m) {
       nb::arg("precision") = 2,
       nb::arg("arc_tolerance") = 0.0,
       "Inflate (offset) paths by a given delta");
+    
+    m.def("inflate_paths", 
+      [](const Paths64& paths, double delta, JoinType jt, EndType et,
+         double miter_limit, double arc_tolerance) {
+          return InflatePaths(paths, delta, jt, et, miter_limit, arc_tolerance);
+      },
+      nb::arg("paths"),
+      nb::arg("delta"),
+      nb::arg("jt"),
+      nb::arg("et"),
+      nb::arg("miter_limit") = 2.0,
+      nb::arg("arc_tolerance") = 0.0,
+      "Inflate (offset) paths by a given delta");
 
 
     // Add high-level boolean operation functions

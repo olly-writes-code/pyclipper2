@@ -1,7 +1,7 @@
 project(
   'pyclipper2',
   'cpp',
-  version: '0.0.5',
+  version: '0.0.6',
   meson_version: '>=1.0.0',
   default_options: ['cpp_std=c++23', 'b_ndebug=if-release'],
 )
@@ -23,3 +23,14 @@ mod = python.extension_module(
   include_directories: clipper2_inc,
   install: true,
 )
+
+### this part generates the type stubs using nanobind's stubgen tool
+### I can't get this to work but I will keep it here for when I want to re-visit it
+
+# stubgen = nanobind_dep.get_variable('stubgen')
+# custom_target(
+#   output: 'pyclipper2.pyi',
+#   depends: mod,
+#   command: [python, stubgen, '-m', 'pyclipper2', '-M', 'py.typed'],
+#   build_by_default: true
+# )
