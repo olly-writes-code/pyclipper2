@@ -1,6 +1,5 @@
 from .bindings import (
     VERSION,
-    # Clipper64,
     ClipperOffset,
     ClipType,
     EndType,

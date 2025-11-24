@@ -156,18 +156,6 @@ NB_MODULE(pyclipper2, m) {
       nb::arg("arc_tolerance") = 0.0,
       "Inflate (offset) paths by a given delta");
 
-    // // Add Clipper64 class for main boolean operations
-    // nb::class_<Clipper64>(m, "Clipper64")
-    //     .def(nb::init<int64_t>(), nb::arg("precision") = 2)
-    //     .def("add_subject", &Clipper64::AddSubject)
-    //     .def("add_clip", &Clipper64::AddClip)
-    //     .def("execute", 
-    //         [](Clipper64& self, ClipType ct, FillRule fr) {
-    //             Paths64 solution;
-    //             self.Execute(ct, fr, solution);
-    //             return solution;
-    //         })
-    //     .def("clear", &Clipper64::Clear);
 
     // Add high-level boolean operation functions
     m.def("union",
