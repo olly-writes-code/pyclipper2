@@ -19,6 +19,7 @@ from .bindings import (
     is_positive,
     make_path,
     point_in_polygon,
+    rect_clip,
     union,
     xor_,
 )

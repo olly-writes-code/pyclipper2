@@ -52,7 +52,9 @@ def test_rect64():
     r = pyclipper2.Rect64(0, 0, 100, 100)
     assert r.left == 0
     assert r.right == 100
-    print("✓ Rect64 works")
+
+    path = [pyclipper2.make_path([[-1, -1], [2, 2]])]
+    pyclipper2.rect_clip(r, path)
 
 
 def test_area():

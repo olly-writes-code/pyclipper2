@@ -207,5 +207,12 @@ NB_MODULE(pyclipper2, m) {
             return Xor(subjects, clips, fr);
         },
         "XOR of paths");
+
+    // Add rectangle clipping
+    m.def("rect_clip",
+        [](const Rect64& subjects, const Paths64& rect) {
+            return RectClip(subjects, rect);
+        },
+        "Clip paths to a rectangle");
     
 }
