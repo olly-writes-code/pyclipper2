@@ -156,5 +156,30 @@ NB_MODULE(pyclipper2, m) {
       nb::arg("arc_tolerance") = 0.0,
       "Inflate (offset) paths by a given delta");
 
+
+    // Add high-level boolean operation functions
+    m.def("union",
+        [](const Paths64& subjects, FillRule fr) {
+            return Union(subjects, fr);
+        },
+        "Union of paths");
+
+    m.def("difference",
+        [](const Paths64& subjects, const Paths64& clips, FillRule fr) {
+            return Difference(subjects, clips, fr);
+        },
+        "Difference of paths");
+
+    m.def("intersection",
+        [](const Paths64& subjects, const Paths64& clips, FillRule fr) {
+            return Intersect(subjects, clips, fr);
+        },
+        "Intersection of paths");
+
+    m.def("xor_",  // xor is a Python keyword
+        [](const Paths64& subjects, const Paths64& clips, FillRule fr) {
+            return Xor(subjects, clips, fr);
+        },
+        "XOR of paths");
     
 }

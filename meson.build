@@ -1,9 +1,9 @@
 project(
   'pyclipper2',
   'cpp',
-  version: '0.0.4',
+  version: '0.0.5',
   meson_version: '>=1.0.0',
-  default_options: ['cpp_std=c++17', 'b_ndebug=if-release'],
+  default_options: ['cpp_std=c++23', 'b_ndebug=if-release'],
 )
 
 clipper2_inc = include_directories('external/clipper2/CPP/Clipper2Lib/include')

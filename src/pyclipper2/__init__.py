@@ -13,8 +13,12 @@ from .bindings import (
     Rect64,
     __doc__,
     area,
+    difference,
     inflate_paths,
+    intersection,
     is_positive,
     make_path,
     point_in_polygon,
+    union,
+    xor_,
 )
